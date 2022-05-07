@@ -137,9 +137,11 @@ func dumpMakeVars(ctx Context, config Config, goals, vars []string, write_soong_
 
 // Variables to print out in the top banner
 var BannerVars = []string{
+	"CUSTOM_VERSION",
 	"PLATFORM_VERSION_CODENAME",
 	"PLATFORM_VERSION",
-	"CUSTOM_VERSION",
+	"FALCON_CODENAME",
+	"FALCON_MAINTAINER",
 	"TARGET_PRODUCT",
 	"TARGET_BUILD_VARIANT",
 	"TARGET_BUILD_TYPE",
@@ -163,13 +165,19 @@ var BannerVars = []string{
 func Banner(make_vars map[string]string) string {
 	b := &bytes.Buffer{}
 
-	fmt.Fprintln(b, "============================================")
+	fmt.Fprintln(b, "=============================================")
+	fmt.Fprintln(b, "                                             ")
+	fmt.Fprintln(b, "    Welcome to Falcon OS Build Environment   ")
+	fmt.Fprintln(b, "                    By                       ")
+	fmt.Fprintln(b, "                Team Falcon                  ")
+	fmt.Fprintln(b, "                                             ")
+	fmt.Fprintln(b, "=============================================")
 	for _, name := range BannerVars {
 		if make_vars[name] != "" {
 			fmt.Fprintf(b, "%s=%s\n", name, make_vars[name])
 		}
 	}
-	fmt.Fprint(b, "============================================")
+	fmt.Fprint(b, "===============================================")
 
 	return b.String()
 }
